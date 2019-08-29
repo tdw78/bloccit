@@ -4,11 +4,19 @@
   "description": "A Reddit-like application for users to discuss and share content",
   "main": "index.js",
   "scripts": {
-    "test": "set NODE_ENV=test&& jasmine"
+    "test": "set NODE_ENV=test&& jasmine",
+    "start": "node src/server.js"
   },
   "keywords": [
     "bloccit"
   ],
   "author": "Tim Weiss",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine": "^3.0.0",
+    "request": "^2.83.0"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  }
 }
