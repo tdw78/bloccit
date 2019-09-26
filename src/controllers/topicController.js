@@ -29,17 +29,15 @@ module.exports = {
   },
   show(req, res, next){
 
-    //#1
-         topicQueries.getTopic(req.params.id, (err, topic) => {
+    topicQueries.getTopic(req.params.id, (err, topic) => {
     
-    //#2
-           if(err || topic == null){
-             res.redirect(404, "/");
-           } else {
-             res.render("topics/show", {topic});
-           }
-         });
-       },
+      if(err || topic == null){
+        res.redirect(404, "/");
+      } else {
+        res.render("topics/show", {topic});
+     }
+    });
+   },
   destroy(req, res, next){
         topicQueries.deleteTopic(req.params.id, (err, topic) => {
           if(err){
