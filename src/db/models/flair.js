@@ -2,15 +2,11 @@
 module.exports = (sequelize, DataTypes) => {
   const Flair = sequelize.define('Flair', {
     name: {
-       type: DataTypes.STRING,
-       allowNull: false
-    },
-    color: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    topicId: {
-      type: DataTypes.INTEGER,
+    color: {
+      type: DataTypes.STRING,
       allowNull: false
     },
     postId: {

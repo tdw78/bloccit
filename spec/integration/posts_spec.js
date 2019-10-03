@@ -154,6 +154,5 @@ describe("routes : posts", () => {
           });
         });
     });
-
   });
 });
