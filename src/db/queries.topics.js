@@ -26,12 +26,13 @@ module.exports = {
     })
   },
   getTopic(id, callback){
-    return Topic.findOne({id, 
-      include: [{
-        model: Post,
-        as: "posts"
-      }]
-    })
+    return Topic.findByPk(id, {
+
+     include: [{
+       model: Post,
+       as: "posts"
+     }]
+   })
     .then((topic) => {
       callback(null, topic);
     })
@@ -51,7 +52,7 @@ module.exports = {
     })
   },
   updateTopic(id, updatedTopic, callback){
-    return Topic.findOne({id})
+    return Topic.findByPk(id)
     .then((topic) => {
       if(!topic){
         return callback("Topic not found");
