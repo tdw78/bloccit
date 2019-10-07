@@ -58,10 +58,7 @@ describe("routes : topics", () => {
 
     it("should create a new topic and redirect", (done) => {
 
-//#1
       request.post(options,
-
-//#2
         (err, res, body) => {
           Topic.findOne({where: {title: "blink-182 songs"}})
           .then((topic) => {
@@ -69,6 +66,28 @@ describe("routes : topics", () => {
             expect(topic.title).toBe("blink-182 songs");
             expect(topic.description).toBe("What's your favorite blink-182 song?");
             done();
+          })
+          .catch((err) => {
+            console.log(err);
+            done();
+          });
+        });
+    });
+    it("should not create a new topic that fails validations", (done) => {
+      const options = {
+        url: `${base}create`,
+        form: {
+          title: "ac",
+          body: "dc"
+        }
+      };
+
+      request.post(options,
+        (err, res, body) => {
+          Topic.findOne({where: {title: "ac"}})
+          .then((topic) => {
+              expect(topic).toBeNull();
+              done();
           })
           .catch((err) => {
             console.log(err);
@@ -91,17 +110,11 @@ describe("routes : topics", () => {
   describe("POST /topics/:id/destroy", () => {
 
     it("should delete the topic with the associated ID", (done) => {
-
-//#1
       Topic.findAll()
       .then((topics) => {
-
-//#2
         const topicCountBeforeDelete = topics.length;
 
         expect(topicCountBeforeDelete).toBe(1);
-
-//#3
         request.post(`${base}${this.topic.id}/destroy`, (err, res, body) => {
           Topic.findAll()
           .then((topics) => {
@@ -109,12 +122,9 @@ describe("routes : topics", () => {
             expect(topics.length).toBe(topicCountBeforeDelete - 1);
             done();
           })
-
         });
       });
-
     });
-
   });
   describe("GET /topics/:id/edit", () => {
 
@@ -126,7 +136,6 @@ describe("routes : topics", () => {
         done();
       });
     });
-
   });
   describe("POST /topics/:id/update", () => {
 
@@ -138,12 +147,10 @@ describe("routes : topics", () => {
             description: "There are a lot of them"
           }
         };
-//#1
         request.post(options,
           (err, res, body) => {
 
           expect(err).toBeNull();
-//#2
           Topic.findOne({
             where: { id: this.topic.id }
           })
@@ -153,6 +160,5 @@ describe("routes : topics", () => {
           });
         });
     });
-
   });
 });
