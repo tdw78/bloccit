@@ -35,7 +35,7 @@ module.exports = {
             as: "topicId"      // reference as topicId
           },
       }
-    });
+    };
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Posts');
