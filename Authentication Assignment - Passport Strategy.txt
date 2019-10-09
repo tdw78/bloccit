@@ -1,0 +1,18 @@
+Passport-twitter Strategy Explanation:
+
+The passport-twitter strategy allows your app to authenticate a 
+user with their existing twitter account.
+
+To utilize this strategy you must first register your app with 
+twitter.com.  When registering, you must provide a callback URL that
+matches the route on your app that will bring users to twitter to 
+login.  After registering your app, you will be issued an API key 
+and an API secret.  The API key, API secret and the callbak URL must
+be included as properties of the new strategy of your app.
+
+Now, when a user clicks on the sign-up button for your app, they will be directed to 
+the callback URL.  This route will direct the user to twitter.com.  The user will 
+then login to twitter.  After the user has logged in, Twitter sends an access token 
+to your app specifically for the user. Your app will then send the access token back 
+to twitter and when twitter verifies the access token, it will send back the 
+protected resources regarding the user, and the user is now authenticated.
