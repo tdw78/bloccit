@@ -40,34 +40,59 @@ module.exports = {
       callback(err);
     })
   },
-  deleteTopic(id, callback){
-    return Topic.destroy({
-      where: {id}
-    })
-    .then((topic) => {
-      callback(null, topic);
-    })
-    .catch((err) => {
-      callback(err);
-    })
-  },
-  updateTopic(id, updatedTopic, callback){
-    return Topic.findByPk(id)
-    .then((topic) => {
-      if(!topic){
-        return callback("Topic not found");
-      }
+  deleteTopic(req, callback){
 
-//#1
-      topic.update(updatedTopic, {
-        fields: Object.keys(updatedTopic)
-      })
-      .then(() => {
-        callback(null, topic);
-      })
-      .catch((err) => {
-        callback(err);
-      });
-    });
-  }
+        return Topic.findByPk(req.params.id)
+        .then((topic) => {
+          const authorized = new Authorizer(req.user, topic).destroy();
+   
+          if(authorized) {
+            topic.destroy()
+            .then((res) => {
+              callback(null, topic);
+            });
+          } else {
+   
+            req.flash("notice", "You are not authorized to do that.")
+            callback(401);
+          }
+        })
+        .catch((err) => {
+          callback(err);
+        });
+      },
+      updateTopic(req, updatedTopic, callback){
+
+        // #1
+             return Topic.findByPk(req.params.id)
+             .then((topic) => {
+        
+        // #2
+               if(!topic){
+                 return callback("Topic not found");
+               }
+        
+        // #3
+               const authorized = new Authorizer(req.user, topic).update();
+        
+               if(authorized) {
+        
+        // #4
+                 topic.update(updatedTopic, {
+                   fields: Object.keys(updatedTopic)
+                 })
+                 .then(() => {
+                   callback(null, topic);
+                 })
+                 .catch((err) => {
+                   callback(err);
+                 });
+               } else {
+        
+        // #5
+                 req.flash("notice", "You are not authorized to do that.");
+                 callback("Forbidden");
+               }
+             });
+           }
 }
