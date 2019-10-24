@@ -45,6 +45,48 @@ describe("routes : posts", () => {
     });
 
   });
+
+  // beforeEach((done) => {
+  //   this.topic;
+  //   this.post;
+  //   this.user;
+
+  //   sequelize.sync({force: true}).then((res) => {
+
+  //     User.create({
+  //       email: "starman@tesla.com",
+  //       password: "Trekkie4lyfe"
+  //     })
+  //     .then((user) => {
+  //       this.user = user;
+
+  //       Topic.create({
+  //         title: "Winter Games",
+  //         description: "Post your Winter Games stories.",
+  //         })
+  //       .then((topic) => {
+  //         this.topic = topic;
+  //         done();
+  //       })
+        
+  //       Post.create({
+  //           title: "Snowball Fighting",
+  //           body: "So much snow!",
+  //           userId: this.user.id,
+  //           topicId: this.topic.id
+  //         })
+  //         .then((post) => {
+  //           this.post = post;
+  //           done();
+  //         })
+  //         .catch((err) => {
+  //           console.log(err);
+  //           done();
+  //         })
+  //     })
+  //   });
+
+  // });
   describe("GET /topics/:topicId/posts/new", () => {
 
     it("should render a new post form", (done) => {
