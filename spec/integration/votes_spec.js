@@ -12,13 +12,11 @@ describe("routes : votes", () => {
 
   beforeEach((done) => {
 
- // #2
     this.user;
     this.topic;
     this.post;
     this.vote;
 
- // #3
     sequelize.sync({force: true}).then((res) => {
       User.create({
         email: "starman@tesla.com",
@@ -95,9 +93,9 @@ describe("routes : votes", () => {
           }
         );
       });
-
     });
-  });
+  });             //End guest context
+
   describe("signed in user voting on a post", () => {
 
     beforeEach((done) => {  // before each suite in this context
@@ -120,6 +118,7 @@ describe("routes : votes", () => {
         const options = {
           url: `${base}${this.topic.id}/posts/${this.post.id}/votes/upvote`
         };
+        
         request.get(options,
           (err, res, body) => {
             Vote.findOne({          
@@ -139,10 +138,9 @@ describe("routes : votes", () => {
               console.log(err);
               done();
             });
-          }
-        );
+          });
       });
-    });
+  });
 
     describe("GET /topics/:topicId/posts/:postId/votes/downvote", () => {
 
@@ -169,11 +167,8 @@ describe("routes : votes", () => {
               console.log(err);
               done();
             });
-          }
-        );
-      });
-    });
-
-  }); //end context for signed in user
-  
+          });
+     });
+   });
+  });             //end context for signed in user
 });
