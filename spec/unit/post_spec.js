@@ -47,7 +47,8 @@ describe("Post", () => {
       Post.create({
         title: "Pros of Cryosleep during the long journey",
         body: "1. Not having to answer the 'are we there yet?' question.",
-        userId: this.user.id
+        userId: this.user.id,
+        topicId: this.topic.id,
       })
       .then((post) => {
 
