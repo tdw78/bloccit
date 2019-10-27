@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false
-    }
+    },
   }, {});
   Post.associate = function(models) {
     Post.belongsTo(models.Topic, {
@@ -38,6 +38,13 @@ module.exports = (sequelize, DataTypes) => {
     Post.hasMany(models.Favorite, {
       foreignKey: "postId",
       as: "favorites"
+    });
+    Post.afterCreate((post) => {
+      return models.Vote.create({
+        value: 1,
+        userId: post.userId,
+        postId: post.id
+      });
     });
   };
   Post.prototype.getPoints = function(){

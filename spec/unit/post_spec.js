@@ -2,6 +2,7 @@ const sequelize = require("../../src/db/models/index").sequelize;
 const Topic = require("../../src/db/models").Topic;
 const Post = require("../../src/db/models").Post;
 const User = require("../../src/db/models").User;
+const Vote = require("../../src/db/models").Vote;
 
 describe("Post", () => {
 
@@ -162,6 +163,50 @@ describe("Post", () => {
     });
 
   });
+  describe("lifecycle test", () => {
+
+    it("should automatically create an upvote on a new post", (done) => {
+
+      Post.create({
+          title: "Dress code on Proxima b",
+          body: "Spacesuit, space helmet, space boots, and space gloves",
+          topicId: this.topic.id,
+          userId: this.user.id
+        })
+       .then((post) => {
+
+        expect(post.vote).not.toBeNull();
+        done();
+
+      })
+      .catch((err) => {
+        console.log(err);
+        done();
+      });
+    });
+});
+
+// describe("#getVote()", () => {
+
+//   it("should return the associated vote", (done) => {
+
+//     Post.create({
+//         title: "Dress code on Proxima b",
+//         body: "Spacesuit, space helmet, space boots, and space gloves",
+//         topicId: this.topic.id,
+//         userId: this.user.id
+//       })
+
+//     this.post.getVote()
+//     .then((associatedVote) => {
+//       expect(associatedVote.value).toBe(1);
+//       done();
+//     });
+
+//   });
+
+// });
+
 });
 
 
