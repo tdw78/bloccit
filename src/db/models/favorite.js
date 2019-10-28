@@ -16,11 +16,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "postId",
       onDelete: "CASCADE"
     });
-
     Favorite.belongsTo(models.User, {
       foreignKey: "userId",
       onDelete: "CASCADE"
     });
-  };
+  
+};
   return Favorite;
 };
