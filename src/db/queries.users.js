@@ -46,14 +46,18 @@ module.exports = {
              .then((comments) => {
     // #7
                result["comments"] = comments;
-               callback(null, result);
-             })
-             .catch((err) => {
-               callback(err);
-             })
-           })
+             });
+              Favorite.scope({method: ["userFavorites", id]}).findAll()
+                .then((favorites) => {
+                  result["favorites"] = favorites;
+                  callback(null, result);
+              })
+              .catch((err) => {
+                callback(err);
+              })
+             });
          }
-       })
+       });
      }
 
 }
