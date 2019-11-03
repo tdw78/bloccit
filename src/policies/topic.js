@@ -3,15 +3,11 @@ const ApplicationPolicy = require("./application");
 module.exports = class TopicPolicy extends ApplicationPolicy {
 
   new() {
-    return this.user != null;
+    return this._isAdmin();
   }
 
   create() {
     return this.new();
-  }
-
-  show() {
-    return true;
   }
 
   edit() {
