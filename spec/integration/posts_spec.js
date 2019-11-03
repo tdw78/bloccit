@@ -86,7 +86,7 @@ describe("routes : topics", () => {
         });
       });
       describe("POST /topics/:topicId/posts/create", () => {
-          it("should not create a new post", (done) => {
+          it("should create a new post", (done) => {
              const options = {
                url: `${base}/${this.topic.id}/posts/create`,
                form: {
@@ -97,7 +97,7 @@ describe("routes : topics", () => {
            request.post(options, (err, res, body) => {
              Post.findOne({where: {title: "Watching snow melt"}})
               .then((post) => {
-                expect(post).toBeNull();
+                expect(post).not.toBeNull();
                 done();
               })
               .catch((err) => {
