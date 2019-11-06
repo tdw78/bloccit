@@ -1,20 +1,20 @@
-const ApplicationPolicy = require("./application");
+// const ApplicationPolicy = require("./application");
 
-module.exports = class VotePolicy extends ApplicationPolicy {
+// module.exports = class VotePolicy extends ApplicationPolicy {
   
-  new() {
-    return this._isAdmin();
-  }
+//   new() {
+//     return this._isAdmin();
+//   }
   
-  create() {
-    return this._isAdmin();
-  }
+//   create() {
+//     return this._isAdmin();
+//   }
 
-  update() {
-    return this.edit();
-  }
+//   update() {
+//     return this.edit();
+//   }
 
-  destroy() {
-    return this.update();
-  }
-}
+//   destroy() {
+//     return this.update();
+//   }
+// }
