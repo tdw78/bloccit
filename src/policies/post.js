@@ -7,7 +7,7 @@ module.exports = class PostPolicy extends ApplicationPolicy {
   }
   
   create() {
-    return this._isAdmin();
+    return this.new();
   }
 
   show() {
