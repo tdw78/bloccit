@@ -30,7 +30,7 @@ function authorizeUser(role, done) { // helper function to create and authorize 
 }
 
 
-describe("routes : topics", () => {
+describe("routes : posts", () => {
 
   beforeEach((done) => {
     this.topic;
@@ -86,7 +86,7 @@ describe("routes : topics", () => {
         });
       });
       describe("POST /topics/:topicId/posts/create", () => {
-          it("should not create a new post", (done) => {
+          it("should create a new post", (done) => {
              const options = {
                url: `${base}/${this.topic.id}/posts/create`,
                form: {
@@ -97,7 +97,10 @@ describe("routes : topics", () => {
            request.post(options, (err, res, body) => {
              Post.findOne({where: {title: "Watching snow melt"}})
               .then((post) => {
-                expect(post).toBeNull();
+                expect(post).not.toBeNull();
+                expect(post.title).toBe("Watching snow melt");
+               expect(post.body).toBe("Without a doubt my favoriting things to do besides watching paint dry!");
+               expect(post.topicId).not.toBeNull();
                 done();
               })
               .catch((err) => {
