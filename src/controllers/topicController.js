@@ -25,20 +25,18 @@ module.exports = {
   },
   create(req, res, next){
 
-        // #1
-            const authorized = new Authorizer(req.user).create();
+    const authorized = new Authorizer(req.user).create();
        
-        // #2
-            if(authorized) {
-              let newTopic = {
-                title: req.body.title,
-                description: req.body.description
-              };
-              topicQueries.addTopic(newTopic, (err, topic) => {
-                if(err){
-                  res.redirect(500, "topics/new");
-                } else {
-                  res.redirect(303, `/topics/${topic.id}`);
+      if(authorized) {
+          let newTopic = {
+              title: req.body.title,
+              description: req.body.description
+         };
+         topicQueries.addTopic(newTopic, (err, topic) => {
+            if(err){
+              res.redirect(500, "topics/new");
+           } else {
+              res.redirect(303, `/topics/${topic.id}`);
                 }
               });
             } else {

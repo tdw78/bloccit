@@ -76,26 +76,22 @@ describe("routes : votes", () => {
         const options = {
           url: `${base}${this.topic.id}/posts/${this.post.id}/votes/upvote`
         };
-        request.get(options,
-          (err, res, body) => {
-            Vote.findOne({            // look for the vote, should not find one.
-              where: {
-                userId: this.user.id,
-                postId: this.post.id
-              }
-            })
-            .then((vote) => {
-              expect(vote).toBeNull();
+        Vote.findOne({where: {} })
+        .then((votes) => {
+          const voteCount = votes.length
+          request.get(options,
+            (err, res, body) => {
+             
+              Vote.findOne({where: {} })
+              .then((votes) => {
+                const newCount = votes.length
+              expect(newCount).toEqual(voteCount);
               done();
-            })
-            .catch((err) => {
-              console.log(err);
-              done();
-            });
-          }
-        );
+              })   
+            }
+          );
+         })
       });
-
     });
   });
   describe("signed in user voting on a post", () => {

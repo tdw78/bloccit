@@ -1,10 +1,12 @@
 const voteQueries = require("../db/queries.votes.js");
+const Authorizer = require("../policies/vote");
 
 module.exports = {
-  upvote(req, res, next){
 
- // #2
-    if(req.user){
+  upvote(req, res, next){
+    const authorized = new Authorizer(req.user).create();
+ 
+    if(authorized){
       voteQueries.createVote(req, 1, (err, vote) => {
         if(err){
           req.flash("error", err);
@@ -12,7 +14,6 @@ module.exports = {
         res.redirect(req.headers.referer);
       });
 
- // #3
     } else {
       req.flash("notice", "You must be signed in to do that.")
       res.redirect(req.headers.referer);

@@ -1,9 +1,9 @@
 const ApplicationPolicy = require("./application");
 
-module.exports = class PostPolicy extends ApplicationPolicy {
+module.exports = class VotePolicy extends ApplicationPolicy {
   
   new() {
-    return this.user != null;
+    return this._isAdmin();
   }
   
   create() {
