@@ -19,26 +19,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   User.associate = function(models) {
-    User.hasMany(models.Post, {
-      foreignKey: "userId",
-      as: "posts"
-    });
-    User.hasMany(models.Comment, {
-      foreignKey: "userId",
-      as: "comments"
-    });
-    User.hasMany(models.Vote, {
-      foreignKey: "userId",
-      as: "votes"
-    });
-    User.hasMany(models.Favorite, {
-      foreignKey: "userId",
-      as: "favorites"
-    });
+   
   };
-  User.prototype.isAdmin = function() {
-    return this.role === "admin";
-  };
+
   
   return User;
 };
