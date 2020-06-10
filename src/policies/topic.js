@@ -10,9 +10,9 @@ module.exports = class TopicPolicy extends ApplicationPolicy {
     return this.new();
   }
 
-  edit() {
-    return this._isAdmin();
-  }
+  // edit() {
+  //   return this._isAdmin();
+  // }
 
   update() {
     return this.edit();
