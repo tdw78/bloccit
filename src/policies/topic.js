@@ -14,11 +14,11 @@ module.exports = class TopicPolicy extends ApplicationPolicy {
   //   return this._isAdmin();
   // }
 
-  update() {
-    return this.edit();
-  }
+  // update() {
+  //   return this.edit();
+  // }
 
-  destroy() {
-    return this.update();
-  }
+  // destroy() {
+  //   return this.update();
+  // }
 }
